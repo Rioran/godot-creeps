@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://b6wpqjkr80uyd"]
+
+[ext_resource type="Texture2D" uid="uid://coa4u8e73fsme" path="res://art/joystick-ring.png" id="1_7hus0"]
+[ext_resource type="Script" path="res://godots/joystick.gd" id="1_pbg7q"]
+[ext_resource type="Texture2D" uid="uid://056n3ygj7o6n" path="res://art/joystick-nob.png" id="2_fp4um"]
+[ext_resource type="Script" path="res://godots/joystick_nob.gd" id="4_e1sum"]
+
+[sub_resource type="GDScript" id="GDScript_si61y"]
+script/source = "extends Sprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="joystick" type="Node2D"]
+script = ExtResource("1_pbg7q")
+
+[node name="Joystick-ring" type="Sprite2D" parent="."]
+texture = ExtResource("1_7hus0")
+script = SubResource("GDScript_si61y")
+
+[node name="Joystick-nob" type="Sprite2D" parent="."]
+position = Vector2(3.63798e-12, 4.76837e-07)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_fp4um")
+script = ExtResource("4_e1sum")
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = -928.0
+offset_top = -936.0
+offset_right = 936.0
+offset_bottom = 936.0
+
+[connection signal="button_down" from="Button" to="Joystick-nob" method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="Joystick-nob" method="_on_button_button_up"]

@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://crleebr3gx2ht"]
+
+[ext_resource type="Script" path="res://godots/main.gd" id="1_5142a"]
+[ext_resource type="PackedScene" uid="uid://b8l6onprbyusv" path="res://godots/Player.tscn" id="1_ydu7j"]
+[ext_resource type="PackedScene" uid="uid://bx0ijnuj4wh2a" path="res://godots/Mob.tscn" id="2_lsmyh"]
+[ext_resource type="PackedScene" uid="uid://3lr7coq6f854" path="res://godots/HUD.tscn" id="4_lvde6"]
+[ext_resource type="AudioStream" uid="uid://r6by74hmlyn3" path="res://art/rioran-quantori-rythm.mp3" id="5_w5avg"]
+[ext_resource type="AudioStream" uid="uid://b007tv3ircub6" path="res://art/relax.mp3" id="6_dy7t8"]
+
+[sub_resource type="Curve2D" id="Curve2D_saeau"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 480, 0, 0, 0, 0, 0, 480, 720, 0, 0, 0, 0, 0, 720, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Node" type="Node"]
+script = ExtResource("1_5142a")
+mob_scene = ExtResource("2_lsmyh")
+
+[node name="HUD" parent="." instance=ExtResource("4_lvde6")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.278431, 0.458824, 0.301961, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_ydu7j")]
+
+[node name="MobTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="ScoreTimer" type="Timer" parent="."]
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(240, 450)
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_saeau")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_w5avg")
+parameters/looping = false
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_dy7t8")
+
+[connection signal="start_game" from="HUD" to="." method="new_game"]
+[connection signal="hit" from="Player" to="." method="game_over"]
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
+[connection signal="timeout" from="ScoreTimer" to="." method="_on_score_timer_timeout"]
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+
+[editable path="HUD"]
