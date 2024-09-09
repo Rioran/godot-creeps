@@ -1,7 +1,12 @@
 # Dodge the Creeps 2D assets
 
-Used by the "Your first 2D game" tutorial:
+Play on mobile phone with sounds: https://rioran.github.io/godot-creeps/html/
 
-https://docs.godotengine.org/en/latest/getting_started/first_2d_game/index.html
+Used by the "Your first 2D game" tutorial: https://docs.godotengine.org/en/latest/getting_started/first_2d_game/index.html
 
-Upgraded with a mobile stick controller and my sounds.
+Upgraded with:
+
+- a mobile stick controller
+- player model rotation according to movement direction
+- my sounds
+- lesser hitbox for both player and mobs.
