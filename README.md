@@ -1,6 +1,5 @@
 # Dodge the Creeps 2D assets
 
-|---|---|
 | ![Start screen](art/preview-main.png) | ![Game screen](art/preview.png) |
 |---|---|
 
